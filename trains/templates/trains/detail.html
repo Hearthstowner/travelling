@@ -1,0 +1,66 @@
+{% extends "base.html" %} 
+{% block title %} Город {% endblock %} 
+
+    {% block content %}
+    <h1 class="display-4">Поезд</h1>
+    <div class="row">
+        <div class='col-md-6'>
+            <table class="table table-striped">
+            <thead>
+            <tr>
+                <th> Номер поезда</th>
+                <th> Откуда</th>
+                <th> Куда</th>
+                <th> Время в пути</th>
+                <th> &nbsp;</th>
+                <th> &nbsp;</th>
+            <tbody>
+
+                <tr>
+                    <td>
+                        <a href="{% url 'train:detail' pk=object.pk%}">
+                            {{object.name}} 
+                        </a>
+                    </td>
+                    <td>
+                            {{object.from_city}} 
+                        </a>
+                    </td>
+                    <td>
+                            {{object.to_city}} 
+                        </a>
+                    </td>
+                    <td>
+                            {{object.travel_time}} 
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'train:update' pk=object.pk%}">
+                        <button type="button" class="btn btn-primary btn-sm">
+                        Редактировать
+                        </button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'train:delete' pk=object.pk%}">
+                        <button type="button" class="btn btn-danger btn-sm">
+                        Удалить
+                        </button>
+                    </a>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+       <div class='col-md-6'>
+           <a href='{% url "train:home" %}'>
+                <button type="button" class="btn btn-light">
+                Назад к списку
+                </button>
+            </a>
+    </div>
+    </div>
+    
+{% endblock %}
