@@ -10,7 +10,7 @@ class RouteForm(forms.Form):
     to_city = forms.ModelChoiceField(empty_label="Выберите город", label='Куда', queryset=City.objects.all(),
                                      widget=forms.Select(
                                      attrs={'class': 'form-control js-example-basic-single'}))
-    across_cities = forms.ModelMultipleChoiceField(empty_label="Выберите город(a)", label='Через города', queryset=City.objects.all(),
+    across_cities = forms.ModelMultipleChoiceField(label='Через города', queryset=City.objects.all(),
                                                    required=False,
                                                    widget=forms.SelectMultiple(
                                                    attrs={'class': 'form-control js-example-basic-multiple'}))
