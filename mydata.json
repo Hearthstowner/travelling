@@ -1,0 +1,9 @@
+[
+{
+    "model": "cities.city",
+    "pk": 1,
+    "fields": {
+        "name": "\u041f\u0435\u043d\u0437\u0430"
+    }
+}
+]
