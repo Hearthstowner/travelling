@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse
 from routes import views as routes_views
 from cities import views as cities_views
+#from .forms import RouteForm
 
 from cities.models import City
 from trains.models import Train
@@ -70,3 +71,19 @@ class RouteTestCase(TestCase):
         graph = routes_views.get_graph()
         all_ways = list(routes_views.dfs_paths(graph, self.city_A.id, self.city_E.id))
         self.assertEqual(len(all_ways), 4)
+    
+    # def test_valid_form(self):
+    #     form_data = {'from_city':self.city_A.id, 'to_city': self.city_E.id, 
+    #                     'across_cities':[self.city_C.id], 'travelling_time': 30} 
+    #     form = RouteForm(data=form_data)
+    #     self.assertTrue(form.is_valid())
+
+    def test_messages_error_more_time(self):
+        response = self.client.post('/find/', {'from_city':self.city_A.id, 'to_city': self.city_E.id, 
+                                                'across_cities':[self.city_C.id], 'travelling_time': 10})
+        self.assertContains(response, 'Время в пути, больше заданного.', 1, 200)
+
+    def test_messages_error_another_city(self):
+        response = self.client.post('/find/', {'from_city':self.city_B.id, 'to_city': self.city_E.id, 
+                                                'across_cities':[self.city_C.id], 'travelling_time': 20})
+        self.assertContains(response, 'Маршрут, через эти города невозможен', 1, 200) 
